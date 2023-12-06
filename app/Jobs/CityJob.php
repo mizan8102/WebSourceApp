@@ -10,8 +10,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class CityJob implements ShouldQueue {
+class CityJob implements ShouldQueue
+{
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
@@ -19,17 +21,24 @@ class CityJob implements ShouldQueue {
      */
     protected $cityData;
 
-    public function __construct($cityData) {
+    public function __construct($cityData)
+    {
         $this->cityData = $cityData;
     }
 
     /**
      * Execute the job.
      */
-    public function handle(): void {
-        foreach($this->cityData as $key => $value) {
-            $city = new CityDTO($value);
-            $store = City::create($city->toArray());
+    public function handle(): void
+    {
+        try {
+            foreach ($this->cityData as $key => $value) {
+                $city = new CityDTO($value);
+                $store = City::create($city->toArray());
+            }
+        } catch (\Exception $e) {
+            Log::error('CityJob failed: ' . $e->getMessage());
         }
     }
+
 }

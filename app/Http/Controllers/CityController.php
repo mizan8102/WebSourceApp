@@ -23,11 +23,15 @@ class CityController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
+        // Retrieve filters from the request
         $data['name'] = request('name', '');
         $data['state'] = request('state', '');
         $data['country'] = request('country', '');
-        $data['perPage'] = request('perPage',10);
+        $data['perPage'] = request('perPage', 10);
+
+        // Call the repository to get index data
         $res = $this->cityRepositoryInterface->index($data);
+
         if($res) {
             return $this->successResponse($res, "retrive successfull");
         } else {
