@@ -23,5 +23,8 @@ Route::controller(AuthController::class)->group(function () {
 
 // only for authenticate user 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::resource('/city',CityController::class);
+    Route::resource('/city', CityController::class);
+    Route::post('/cityFileUpload', [CityController::class, 'cityFileUpload']);
 });
+
+Route::get('/public/City', [CityController::class, 'index']);

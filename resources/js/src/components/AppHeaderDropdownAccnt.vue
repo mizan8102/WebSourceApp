@@ -22,7 +22,7 @@ const router = useRouter();
 
 function logout() {
     store.dispatch("logout").then(() => {
-        router.push({ name: "login" });
+        router.push("/home");
     });
 }
 </script>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import AppLayout from '../components/layouts/AppLayout.vue';
+import DefaultLayout from '../components/layouts/DefaultLayout.vue'
 import store from "../store";
 
 const routes = [
@@ -20,8 +21,13 @@ const routes = [
             },
             {
                 path: "city",
-                name: "City",
+                name: "Create",
                 component: () => import('../pages/admin/city/City.vue'),
+            },
+            {
+                path: "cityHome",
+                name: "List",
+                component: () => import('../pages/admin/city/CityHome.vue'),
             },
 
         ]
@@ -33,6 +39,31 @@ const routes = [
         meta: {
             requiresGuest: true
         }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () => import('../pages/Auth/Register.vue'),
+        meta: {
+            requiresGuest: true
+        }
+    },
+
+    {
+        path: '/',
+        name: 'city',
+        redirect: '/home',
+        component: DefaultLayout,
+        meta: {
+            requiresGuest: true
+        },
+        children: [
+            {
+                path: '/home',
+                name: 'home',
+                component: () => import('../pages/clients/City/City.vue'),
+            }
+        ]
     },
 
     // not found 404

@@ -8,17 +8,18 @@ let errorMsg = ref("");
 const router = useRouter();
 
 const user = {
+    name: "",
     email: "",
     password: "",
 };
 
-function login() {
+function register() {
     loading.value = true;
     store
-        .dispatch("login", user)
+        .dispatch("register", user)
         .then(() => {
             loading.value = false;
-            router.push("/admin/cityHome");
+            router.push("/login");
         })
         .catch(({ response }) => {
             loading.value = false;
@@ -50,14 +51,26 @@ function login() {
                                     </ul>
                                 </div>
 
-                                <CForm method="POST" @submit.prevent="login">
-                                    <h1>Login</h1>
+                                <CForm method="POST" @submit.prevent="register">
+                                    <h1>Registration</h1>
                                     <p class="text-body-secondary">
-                                        Sign In to your account
+                                        Sign Up to your account
                                     </p>
                                     <CInputGroup class="mb-3">
                                         <CInputGroupText>
                                             <CIcon icon="cil-user" />
+                                        </CInputGroupText>
+                                        <CFormInput
+                                            v-model="user.name"
+                                            placeholder="Name"
+                                            autocomplete="name"
+                                            type="text"
+                                            required
+                                        />
+                                    </CInputGroup>
+                                    <CInputGroup class="mb-3">
+                                        <CInputGroupText>
+                                            <CIcon icon="cil-mail" />
                                         </CInputGroupText>
                                         <CFormInput
                                             v-model="user.email"
@@ -90,19 +103,19 @@ function login() {
                                                 {{
                                                     loading
                                                         ? "Loading..."
-                                                        : "Login"
+                                                        : "Register"
                                                 }}
                                             </CButton>
                                         </CCol>
                                         <CCol :xs="6" class="text-right">
                                             <CButton
                                                 @click="
-                                                    $router.push('/register')
+                                                    () => $router.push('/login')
                                                 "
                                                 color="link"
                                                 class="px-0"
                                             >
-                                                Not Register? Registration
+                                                Already register. Login
                                             </CButton>
                                         </CCol>
                                     </CRow>

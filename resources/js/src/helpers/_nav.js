@@ -8,7 +8,7 @@ export default [
   {
     component: 'CNavItem',
     name: 'City',
-    to: '/admin/city',
+    to: '/admin/cityHome',
     icon: 'cil-puzzle',
   },
  

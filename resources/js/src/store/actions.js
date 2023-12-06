@@ -10,6 +10,13 @@ export function login({ commit }, data) {
     })
 }
 
+export function register({ commit }, data) {
+  return axiosClient.post('/register', data)
+    .then(({ data }) => {
+      return data;
+    })
+}
+
 
 export function getCurrentUser({ commit }, data) {
   return axiosClient.get('/user', data)
