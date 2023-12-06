@@ -11,12 +11,12 @@ List of pages-
     - Login Page
     - Registration Page
 
-### Excel Import
+### Import
 
     - Import Excel Form
     - Populate and Show List 
 
-### List Pages
+### List
 
 Create a page within the admin panel to display all cities' data in a list format. Implement a filter mechanism to allow users to filter data based on state and/or county.
 
@@ -69,31 +69,19 @@ Follow these steps to set up and run the project locally.
 
 ### 1. Clone Project
 
-    ```bash
     git clone <https://github.com/mizan8102/WebSourceApp.git>
-
-    ```
 
 ### 2. Navigate to Project Folder
 
-    ```bash
     cd ./WebSourceApp
-
-    ```
 
 ### 3. Composer Install
 
-    ```bash
     composer install --ignore-platform-reqs
-
-    ```
 
 ### 4. .env Setup
 
-    ```bash
     cp .env.example .env
-
-    ```
 
 ### 5. Database Setup
 
@@ -101,38 +89,23 @@ Create a database named \`websolution\`.
 
 ### 6. Generate Application Key
 
-    ```bash
     php artisan key:generate
-
-    ```
 
 ### 7. Migrate Database
 
-    ```bash
     php artisan migrate
-
-    ```
 
 ### 8. NPM Setup
 
-    ```bash
     npm install
     npm run build
 
-    ```
-
 ### 9. Run Application
 
-    ```bash
     php artisan serve
-
-    ```
 
 ### 10. Run Job
 
-    ```bash
     php artisan queue:work
-
-    ```
 
 Browse: [http://127.0.0.1:8000/#/](http://127.0.0.1:8000#/)
