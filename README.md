@@ -1,66 +1,138 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# US Cities Information Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project aims to create a web application for managing information about US cities. The application utilizes the CoreUI admin panel for the backend and Vue.js 3 for the public page.
 
-## About Laravel
+## Pages
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+List of pages-
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Authentication
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    - Login Page
+    - Registration Page
 
-## Learning Laravel
+### Excel Import
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    - Import Excel Form
+    - Populate and Show List 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### List Pages
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Create a page within the admin panel to display all cities' data in a list format. Implement a filter mechanism to allow users to filter data based on state and/or county.
 
-## Laravel Sponsors
+### View Mechanism
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Implement a view mechanism to display detailed information about any city in a modal. Users should be able to click on a city in the list to view additional details in a modal without leaving the list page.
 
-### Premium Partners
+## Public Page (SPA) - Vue.js
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### City Search Page
 
-## Contributing
+Create a Vue.js-based single-page application (SPA) for the public page. Implement a city search page where users can search for cities by name, state, and/or county.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Display Search Results
 
-## Code of Conduct
+Ensure that the search results are displayed dynamically without reloading the entire page. Utilize Vue.js features to update the search results seamlessly as users enter search criteria.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Display City Details in Modal
 
-## Security Vulnerabilities
+Implement a modal in the SPA to display detailed information about a city when a user clicks on a show button in list. The modal should show relevant details without requiring a page reload.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Project Description
 
-## License
+This project establishes a comprehensive US cities information management system. The backend enables efficient data management, including batch processing for data upload and a user-friendly interface for viewing and filtering city information. The Vue.js-based SPA provides a seamless public page, allowing users to search for cities and view details without reloading the entire page.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Technologies Used
+
+- **Backend:** Laravel 10
+- **Frontend (SPA):** Vue.js 3
+- **Database:** MySQL
+- **Queue System:** Laravel Jobs/Queue for data upload processing
+
+## Table of Contents
+
+- [Project Installation](#project-installation)
+  - [Clone Project](#1-clone-project)
+  - [Navigate to Project Folder](#2-navigate-to-project-folder)
+  - [Composer Install](#3-composer-install)
+  - [.env Setup](#4-env-setup)
+  - [Database Setup](#5-database-setup)
+  - [Generate Application Key](#6-generate-application-key)
+  - [Migrate Database](#7-migrate-database)
+  - [NPM Setup](#8-npm-setup)
+  - [Run Application](#9-run-application)
+  - [Run Job](#10-run-job)
+
+## Project Installation
+
+Follow these steps to set up and run the project locally.
+
+### 1. Clone Project
+
+    ```bash
+    git clone <https://github.com/mizan8102/WebSourceApp.git>
+
+    ```
+
+### 2. Navigate to Project Folder
+
+    ```bash
+    cd ./WebSourceApp
+
+    ```
+
+### 3. Composer Install
+
+    ```bash
+    composer install --ignore-platform-reqs
+
+    ```
+
+### 4. .env Setup
+
+    ```bash
+    cp .env.example .env
+
+    ```
+
+### 5. Database Setup
+
+Create a database named \`websolution\`.
+
+### 6. Generate Application Key
+
+    ```bash
+    php artisan key:generate
+
+    ```
+
+### 7. Migrate Database
+
+    ```bash
+    php artisan migrate
+
+    ```
+
+### 8. NPM Setup
+
+    ```bash
+    npm install
+    npm run build
+
+    ```
+
+### 9. Run Application
+
+    ```bash
+    php artisan serve
+
+    ```
+
+### 10. Run Job
+
+    ```bash
+    php artisan queue:work
+
+    ```
+
+Browse: [http://127.0.0.1:8000/#/](http://127.0.0.1:8000#/)
