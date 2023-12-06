@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\CityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +23,5 @@ Route::controller(AuthController::class)->group(function () {
 
 // only for authenticate user 
 Route::middleware(['auth:sanctum'])->group(function () {
-
-    // Route::get('/user', [::class, 'getCurrentUser']);
+    Route::resource('/city',CityController::class);
 });

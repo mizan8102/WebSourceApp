@@ -1,71 +1,111 @@
+<script setup>
+import { ref } from "vue";
+import store from "../../store";
+import { useRouter } from "vue-router";
+
+let loading = ref(false);
+let errorMsg = ref("");
+const router = useRouter();
+
+const user = {
+    email: "",
+    password: "",
+};
+
+function login() {
+    loading.value = true;
+    store
+        .dispatch("login", user)
+        .then(() => {
+            loading.value = false;
+            router.push("/admin/dashboard");
+        })
+        .catch(({ response }) => {
+            loading.value = false;
+            errorMsg.value = response.data.errors;
+        });
+}
+</script>
+
 <template>
     <div class="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow class="justify-content-center">
-          <CCol :md="8">
-            <CCardGroup>
-              <CCard class="p-4">
-                <CCardBody>
-                  <CForm>
-                    <h1>Login</h1>
-                    <p class="text-body-secondary">Sign In to your account</p>
-                    <CInputGroup class="mb-3">
-                      <CInputGroupText>
-                        <CIcon icon="cil-user" />
-                      </CInputGroupText>
-                      <CFormInput
-                        placeholder="Username"
-                        autocomplete="username"
-                      />
-                    </CInputGroup>
-                    <CInputGroup class="mb-4">
-                      <CInputGroupText>
-                        <CIcon icon="cil-lock-locked" />
-                      </CInputGroupText>
-                      <CFormInput
-                        type="password"
-                        placeholder="Password"
-                        autocomplete="current-password"
-                      />
-                    </CInputGroup>
-                    <CRow>
-                      <CCol :xs="6">
-                        <CButton color="primary" class="px-4"> Login </CButton>
-                      </CCol>
-                      <CCol :xs="6" class="text-right">
-                        <CButton color="link" class="px-0">
-                          Forgot password?
-                        </CButton>
-                      </CCol>
-                    </CRow>
-                  </CForm>
-                </CCardBody>
-              </CCard>
-              <CCard class="text-white bg-primary py-5" style="width: 44%">
-                <CCardBody class="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                    <CButton color="light" variant="outline" class="mt-3">
-                      Register Now!
-                    </CButton>
-                  </div>
-                </CCardBody>
-              </CCard>
-            </CCardGroup>
-          </CCol>
-        </CRow>
-      </CContainer>
+        <CContainer>
+            <CRow class="justify-content-center">
+                <CCol :md="5">
+                    <CCardGroup>
+                        <CCard class="p-4">
+                            <CCardBody>
+                                <div
+                                    v-if="Object.keys(errorMsg).length > 0"
+                                    class="alert alert-danger d-flex justify-content-between align-items-center py-3 px-5 rounded"
+                                >
+                                    <ul>
+                                        <li
+                                            v-for="(errors, field) in errorMsg"
+                                            :key="field"
+                                        >
+                                            <strong>{{ field }}</strong
+                                            >: {{ errors.join(", ") }}
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <CForm method="POST" @submit.prevent="login">
+                                    <h1>Login</h1>
+                                    <p class="text-body-secondary">
+                                        Sign In to your account
+                                    </p>
+                                    <CInputGroup class="mb-3">
+                                        <CInputGroupText>
+                                            <CIcon icon="cil-user" />
+                                        </CInputGroupText>
+                                        <CFormInput
+                                            v-model="user.email"
+                                            placeholder="Email"
+                                            autocomplete="email"
+                                            type="email"
+                                            required
+                                        />
+                                    </CInputGroup>
+                                    <CInputGroup class="mb-4">
+                                        <CInputGroupText>
+                                            <CIcon icon="cil-lock-locked" />
+                                        </CInputGroupText>
+                                        <CFormInput
+                                            type="password"
+                                            v-model="user.password"
+                                            placeholder="Password"
+                                            autocomplete="current-password"
+                                            required
+                                        />
+                                    </CInputGroup>
+                                    <CRow>
+                                        <CCol :xs="6">
+                                            <CButton
+                                                color="primary"
+                                                class="px-4"
+                                                type="submit"
+                                                :disabled="loading"
+                                            >
+                                                {{
+                                                    loading
+                                                        ? "Loading..."
+                                                        : "Login"
+                                                }}
+                                            </CButton>
+                                        </CCol>
+                                        <CCol :xs="6" class="text-right">
+                                            <CButton color="link" class="px-0">
+                                                Forgot password?
+                                            </CButton>
+                                        </CCol>
+                                    </CRow>
+                                </CForm>
+                            </CCardBody>
+                        </CCard>
+                    </CCardGroup>
+                </CCol>
+            </CRow>
+        </CContainer>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'Login',
-  }
-  </script>
-  
+</template>
